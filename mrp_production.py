@@ -113,13 +113,14 @@ class mrp_product_produce(osv.osv_memory):
                 total_production_cost = 0.0
                 unit_production_cost  = 0.0
                 new_product_standard_price  = 0.0
-                
+                dati=self.browse(cr,uid,ids)
+                qty_finished_products= dati[0].product_qty
 
                 #First of all, identify the main production product between all finished products
                 main_product = False
                 finished_products = production.move_created_ids
                 for fin_prod in finished_products:
-                    qty_finished_products +=fin_prod.product_qty
+                    #qty_finished_products +=fin_prod.product_qty
                     if fin_prod.product_id.id == production.product_id.id:
                         main_product = fin_prod
                         
