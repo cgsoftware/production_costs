@@ -174,7 +174,7 @@ class mrp_product_produce(osv.osv_memory):
                     if (stock_before_producing + qty_finished_products)<>0:
                         new_product_standard_price = ((stock_before_producing * main_product.product_id.standard_price) + (unit_production_cost * qty_finished_products))/ (stock_before_producing + qty_finished_products)
                     else:
-                        new_product_standard_price = new_product_standard_price
+                        new_product_standard_price = unit_production_cost
 
                 #Updates cost management fields for this production
                 vals_production = {
