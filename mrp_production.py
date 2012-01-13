@@ -171,7 +171,10 @@ class mrp_product_produce(osv.osv_memory):
                     ok = self.pool.get('stock.move').write(cr,uid,[main_product.id],{'price_unit':unit_production_cost})
                 #New product standard price (PMP) = ((product stock before producing * standard price) + (unit_production_cost * prod_qty)) / (stock before producing + produced_qty)
                 if qty_finished_products<>0:
-                    new_product_standard_price = ((stock_before_producing * main_product.product_id.standard_price) + (unit_production_cost * qty_finished_products))/ (stock_before_producing + qty_finished_products)
+                    if (stock_before_producing + qty_finished_products)<>0:
+                        new_product_standard_price = ((stock_before_producing * main_product.product_id.standard_price) + (unit_production_cost * qty_finished_products))/ (stock_before_producing + qty_finished_products)
+                    else:
+                        new_product_standard_price = new_product_standard_price
 
                 #Updates cost management fields for this production
                 vals_production = {
